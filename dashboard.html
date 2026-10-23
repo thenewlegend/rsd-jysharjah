@@ -179,8 +179,12 @@ body.dashboard-home #registration-dashboard .dashboard-event-row { display:flex;
       });
 
       renderEvents(data.badmintonEvents);
-      document.getElementById('dashboard-updated').textContent =
-        'Updated ' + new Date(data.updatedAt || Date.now()).toLocaleTimeString();
+      'Updated at ' + new Date(data.updatedAt || Date.now()).toLocaleTimeString('en-US', {
+        hour: 'numeric',
+        minute: '2-digit',
+        second: '2-digit',
+        hour12: true
+        });
     } catch (err) {
       showError((err && err.message) || 'Unable to retrieve registration counts.');
     } finally {
