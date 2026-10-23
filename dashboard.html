@@ -1,0 +1,185 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+		<title>Registration Dashboard - JY Sharjah</title>
+        <link rel="icon" type="image/png" href="images/rsd-logo.png">
+		<meta charset="utf-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
+		<link rel="stylesheet" href="assets/css/main.css" />
+		<noscript><link rel="stylesheet" href="assets/css/noscript.css" /></noscript>
+        <script type="text/javascript">
+            (function(c,l,a,r,i,t,y){
+                c[a]=c[a]||function(){(c[a].q=c[a].q||[]).push(arguments)};
+                t=l.createElement(r);t.async=1;t.src="https://www.clarity.ms/tag/"+i;
+                y=l.getElementsByTagName(r)[0];y.parentNode.insertBefore(t,y);
+            })(window, document, "clarity", "script", "z0mvofdbnk");
+        </script>
+	<style>
+#registration-dashboard{text-align:left}#registration-dashboard .dashboard-intro{margin-bottom:2em}#registration-dashboard .dashboard-status{font-size:.85em;opacity:.8;margin-top:-.5em}#registration-dashboard .dashboard-total{padding:1.35em 1.5em;margin:1.5em 0 2em;border:1px solid rgba(255,255,255,.22);border-radius:4px;display:flex;align-items:center;justify-content:space-between;gap:1em}#registration-dashboard .dashboard-total-label{font-size:.9em;letter-spacing:.08em;text-transform:uppercase}#registration-dashboard .dashboard-total-value{font-size:2.4em;font-weight:600;line-height:1.1}#registration-dashboard .dashboard-grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:1em;margin:1.5em 0 2em}#registration-dashboard .dashboard-card{border:1px solid rgba(255,255,255,.2);border-radius:4px;padding:1.25em;min-width:0}#registration-dashboard .dashboard-card h3{margin-bottom:.5em}#registration-dashboard .dashboard-number{font-size:2em;font-weight:600;line-height:1.2;margin:.3em 0}#registration-dashboard .dashboard-subtitle{font-size:.85em;opacity:.75}#registration-dashboard .dashboard-events{margin-top:2em}#registration-dashboard .dashboard-event-row{display:flex;justify-content:space-between;gap:1em;padding:.8em 0;border-bottom:1px solid rgba(255,255,255,.14)}#registration-dashboard .dashboard-event-row:last-child{border-bottom:0}#registration-dashboard .dashboard-error{padding:1em;border-left:3px solid #d66;margin:1em 0}#registration-dashboard .dashboard-refresh{margin-top:1em}#registration-dashboard .dashboard-refresh button{cursor:pointer}@media screen and (max-width:736px){#registration-dashboard .dashboard-grid{grid-template-columns:1fr}#registration-dashboard .dashboard-total{align-items:flex-start;flex-direction:column}}
+</style>
+
+<style>
+/* Show the dashboard directly; do not require the HTML UP overlay/panel interaction. */
+html, body { min-height: 100%; }
+body { overflow-x: hidden !important; }
+#wrapper { opacity: 1 !important; visibility: visible !important; transform: none !important; }
+#header, #footer { opacity: 1 !important; visibility: visible !important; }
+#main {
+  display: block !important; opacity: 1 !important; visibility: visible !important;
+  position: relative !important; width: min(900px, calc(100% - 2rem)) !important;
+  max-width: 900px !important; margin: 2rem auto !important; padding: 0 !important;
+  transform: none !important;
+}
+#main > article, #main article#registration-dashboard {
+  display: block !important; opacity: 1 !important; visibility: visible !important;
+  position: relative !important; width: 100% !important; max-width: none !important;
+  margin: 0 !important; padding: 2rem !important; transform: none !important;
+}
+#main article:before, #main article:after { display: none !important; }
+@media screen and (max-width: 736px) {
+  #main { width: calc(100% - 1rem) !important; margin: 1rem auto !important; }
+  #main > article, #main article#registration-dashboard { padding: 1rem !important; }
+}
+</style>
+
+
+<style>
+/* Keep the dashboard as the main page content; do not use HTML UP's hidden article panels. */
+html, body { min-height: 100%; }
+body.dashboard-home #wrapper { display:flex !important; flex-direction:column; justify-content:flex-start; min-height:100vh; padding:2rem 1.5rem; }
+body.dashboard-home #header { margin:0 auto 2rem !important; max-width:70rem; width:100%; }
+body.dashboard-home #main { display:block !important; opacity:1 !important; visibility:visible !important; width:100%; max-width:70rem; margin:0 auto 2rem !important; }
+body.dashboard-home #main article,
+body.dashboard-home #main article.active,
+body.dashboard-home #main article.visible { display:block !important; opacity:1 !important; visibility:visible !important; transform:none !important; position:relative !important; width:100% !important; max-width:none !important; max-height:none !important; overflow:visible !important; }
+body.dashboard-home #footer { margin:auto auto 0 !important; }
+body.dashboard-home #registration-dashboard { text-align:left; }
+body.dashboard-home #registration-dashboard .dashboard-grid { display:grid; grid-template-columns:repeat(3,minmax(0,1fr)); gap:1rem; }
+body.dashboard-home #registration-dashboard .dashboard-card { border:1px solid rgba(255,255,255,.2); border-radius:4px; padding:1.25rem; }
+body.dashboard-home #registration-dashboard .dashboard-number { font-size:2rem; font-weight:600; }
+body.dashboard-home #registration-dashboard .dashboard-total { display:flex; align-items:center; justify-content:space-between; gap:1rem; padding:1.25rem; border:1px solid rgba(255,255,255,.22); border-radius:4px; margin:1.5rem 0; }
+body.dashboard-home #registration-dashboard .dashboard-total-value { font-size:2.5rem; font-weight:600; }
+body.dashboard-home #registration-dashboard .dashboard-event-row { display:flex; justify-content:space-between; padding:.8rem 0; border-bottom:1px solid rgba(255,255,255,.14); }
+@media(max-width:736px) {
+ body.dashboard-home #wrapper { padding:1rem .75rem; }
+ body.dashboard-home #registration-dashboard .dashboard-grid { grid-template-columns:1fr; }
+ body.dashboard-home #registration-dashboard .dashboard-total { align-items:flex-start; flex-direction:column; }
+}
+</style>
+
+</head>
+<body class="is-preload dashboard-home">
+<div id="wrapper">
+<header id="header"><div class="logo"><img src="images/rsd-logo.png" alt="Regional Sports Day logo" style="max-width:100%;height:auto;max-height:5em;border:0"></div><div class="content"><div class="inner"><h1>Registration Dashboard</h1><p>Jesus Youth Sharjah · Regional Sports Day 2026–2027</p></div></div></header>
+<div id="main"><article id="registration-dashboard"><h2 class="major">Live Registration Counts</h2><div class="dashboard-intro"><p>Registration totals from the Badminton, Chess and Carrom forms. Counts refresh automatically every 60 seconds.</p><p id="dashboard-updated" class="dashboard-status" aria-live="polite"></p></div><div class="dashboard-total"><div><div class="dashboard-total-label">Total registrations</div><div id="total-registrations" class="dashboard-total-value">0</div></div><div class="dashboard-subtitle">Across all three sports</div></div><div class="dashboard-grid"><section class="dashboard-card"><h3>Badminton</h3><div id="count-badminton" class="dashboard-number">0</div><div class="dashboard-subtitle">Form submissions</div></section><section class="dashboard-card"><h3>Chess</h3><div id="count-chess" class="dashboard-number">0</div><div class="dashboard-subtitle">Form submissions</div></section><section class="dashboard-card"><h3>Carrom</h3><div id="count-carrom" class="dashboard-number">0</div><div class="dashboard-subtitle">Form submissions</div></section></div><section class="dashboard-events"><h3>Badminton event breakdown</h3><p class="dashboard-subtitle">Registrations grouped by the Events field in the Badminton response sheet.</p><div id="badminton-events">
+  <div class="dashboard-event-row"><span>Men’s Doubles</span><strong id="event-mens-doubles">0</strong></div>
+  <div class="dashboard-event-row"><span>Women’s Doubles</span><strong id="event-womens-doubles">0</strong></div>
+  <div class="dashboard-event-row"><span>Mixed Doubles</span><strong id="event-mixed-doubles">0</strong></div>
+</div></section><div id="dashboard-error" class="dashboard-error" hidden></div><div class="dashboard-refresh"><button class="button" type="button" id="refresh-dashboard">Refresh now</button></div></article></div><footer id="footer"><p class="copyright">© Jesus Youth - Sharjah</p></footer></div>
+<script src="assets/js/jquery.min.js"></script><script src="assets/js/browser.min.js"></script><script src="assets/js/breakpoints.min.js"></script><script src="assets/js/util.js"></script>
+<script>
+(function () {
+  'use strict';
+  const API_URL = 'https://script.google.com/macros/s/AKfycbw-38-xZRYtiUATGdlJObB6NYKYgOnvCn9HA6XC7yu8kuI_t5SvTDWbbFTo72yChFQGqQ/exec';
+  const fmt = new Intl.NumberFormat();
+  let callbackCounter = 0;
+  let loading = false;
+
+  function jsonp(url) {
+    return new Promise((resolve, reject) => {
+      const callbackName = '__rsdDashboardCallback' + (++callbackCounter);
+      const script = document.createElement('script');
+      let finished = false;
+      const timeout = setTimeout(() => {
+        cleanup();
+        reject(new Error('Timed out loading registration counts.'));
+      }, 15000);
+      function cleanup() {
+        if (finished) return;
+        finished = true;
+        clearTimeout(timeout);
+        delete window[callbackName];
+        script.remove();
+      }
+      window[callbackName] = data => { cleanup(); resolve(data); };
+      script.onerror = () => { cleanup(); reject(new Error('Could not connect to the registration service.')); };
+      script.src = url + (url.includes('?') ? '&' : '?') +
+        'callback=' + encodeURIComponent(callbackName) + '&_=' + Date.now();
+      document.body.appendChild(script);
+    });
+  }
+
+  function showError(message) {
+    const error = document.getElementById('dashboard-error');
+    error.hidden = false;
+    error.textContent = message;
+  }
+
+  function updateEventCount(id, value) {
+    const target = document.getElementById(id);
+    if (target) target.textContent = fmt.format(Number(value) || 0);
+  }
+
+  function renderEvents(items) {
+    const box = document.getElementById('badminton-events');
+    const normalized = (Array.isArray(items) ? items : []).map(item => ({
+      name: String(item.name || '').toLowerCase(),
+      count: Number(item.registrations) || 0
+    }));
+    const findCount = patterns => {
+      const match = normalized.find(item => patterns.some(pattern => item.name.includes(pattern)));
+      return match ? match.count : 0;
+    };
+    updateEventCount('event-mens-doubles', findCount(["men's doubles", 'mens doubles', 'men doubles']));
+    updateEventCount('event-womens-doubles', findCount(["women's doubles", 'womens doubles', 'women doubles']));
+    updateEventCount('event-mixed-doubles', findCount(['mixed doubles']));
+
+    // If the sheet contains event names beyond the three standard categories, show them too.
+    normalized.forEach(item => {
+      const standard = ["men's doubles", 'mens doubles', 'men doubles', "women's doubles", 'womens doubles', 'women doubles', 'mixed doubles'];
+      if (!standard.some(name => item.name.includes(name))) {
+        const row = document.createElement('div');
+        row.className = 'dashboard-event-row';
+        const label = document.createElement('span');
+        label.textContent = item.name || 'Unspecified event';
+        const count = document.createElement('strong');
+        count.textContent = fmt.format(item.count);
+        row.append(label, count);
+        box.appendChild(row);
+      }
+    });
+  }
+
+  async function loadCounts() {
+    if (loading) return;
+    loading = true;
+    document.getElementById('dashboard-error').hidden = true;
+    try {
+      const data = await jsonp(API_URL);
+      if (!data || data.success !== true) {
+        throw new Error(data && data.message ? data.message : 'The registration service returned an unexpected response.');
+      }
+      document.getElementById('total-registrations').textContent = fmt.format(Number(data.totalRegistrations) || 0);
+      (Array.isArray(data.sports) ? data.sports : []).forEach(sport => {
+        const name = String(sport.name || '').toLowerCase();
+        if (['badminton', 'chess', 'carrom'].includes(name)) {
+          document.getElementById('count-' + name).textContent = fmt.format(Number(sport.registrations) || 0);
+        }
+      });
+      renderEvents(data.badmintonEvents);
+      document.getElementById('dashboard-updated').textContent = 'Updated ' +
+        new Date(data.updatedAt || Date.now()).toLocaleTimeString();
+    } catch (err) {
+      // Keep the visible numeric values on screen; report the connection problem separately.
+      showError((err && err.message) || 'Unable to retrieve registration counts.');
+    } finally {
+      loading = false;
+    }
+  }
+
+  document.getElementById('refresh-dashboard').addEventListener('click', loadCounts);
+  loadCounts();
+  setInterval(loadCounts, 60000);
+})();
+</script></body>
+</html>
