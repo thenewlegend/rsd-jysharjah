@@ -80,34 +80,10 @@ body.dashboard-home #registration-dashboard .dashboard-event-row { display:flex;
 <script>
 (function () {
   'use strict';
-  const API_URL = 'https://script.google.com/macros/s/AKfycbw-38-xZRYtiUATGdlJObB6NYKYgOnvCn9HA6XC7yu8kuI_t5SvTDWbbFTo72yChFQGqQ/exec';
-  const fmt = new Intl.NumberFormat();
-  let callbackCounter = 0;
-  let loading = false;
 
-  function jsonp(url) {
-    return new Promise((resolve, reject) => {
-      const callbackName = '__rsdDashboardCallback' + (++callbackCounter);
-      const script = document.createElement('script');
-      let finished = false;
-      const timeout = setTimeout(() => {
-        cleanup();
-        reject(new Error('Timed out loading registration counts.'));
-      }, 15000);
-      function cleanup() {
-        if (finished) return;
-        finished = true;
-        clearTimeout(timeout);
-        delete window[callbackName];
-        script.remove();
-      }
-      window[callbackName] = data => { cleanup(); resolve(data); };
-      script.onerror = () => { cleanup(); reject(new Error('Could not connect to the registration service.')); };
-      script.src = url + (url.includes('?') ? '&' : '?') +
-        'callback=' + encodeURIComponent(callbackName) + '&_=' + Date.now();
-      document.body.appendChild(script);
-    });
-  }
+  const API_URL = '/api/registrations';
+  const fmt = new Intl.NumberFormat();
+  let loading = false;
 
   function showError(message) {
     const error = document.getElementById('dashboard-error');
@@ -123,27 +99,44 @@ body.dashboard-home #registration-dashboard .dashboard-event-row { display:flex;
   function renderEvents(items) {
     const box = document.getElementById('badminton-events');
     const normalized = (Array.isArray(items) ? items : []).map(item => ({
-      name: String(item.name || '').toLowerCase(),
+      name: String(item.name || ''),
+      normalizedName: String(item.name || '').toLowerCase(),
       count: Number(item.registrations) || 0
     }));
+
     const findCount = patterns => {
-      const match = normalized.find(item => patterns.some(pattern => item.name.includes(pattern)));
+      const match = normalized.find(item =>
+        patterns.some(pattern => item.normalizedName.includes(pattern))
+      );
       return match ? match.count : 0;
     };
-    updateEventCount('event-mens-doubles', findCount(["men's doubles", 'mens doubles', 'men doubles']));
-    updateEventCount('event-womens-doubles', findCount(["women's doubles", 'womens doubles', 'women doubles']));
+
+    updateEventCount('event-mens-doubles',
+      findCount(["men's doubles", 'mens doubles', 'men doubles']));
+    updateEventCount('event-womens-doubles',
+      findCount(["women's doubles", 'womens doubles', 'women doubles']));
     updateEventCount('event-mixed-doubles', findCount(['mixed doubles']));
 
-    // If the sheet contains event names beyond the three standard categories, show them too.
+    // Remove extra event rows from the previous refresh before rebuilding them.
+    box.querySelectorAll('[data-extra-event="true"]').forEach(row => row.remove());
+
+    const standard = [
+      "men's doubles", 'mens doubles', 'men doubles',
+      "women's doubles", 'womens doubles', 'women doubles', 'mixed doubles'
+    ];
+
     normalized.forEach(item => {
-      const standard = ["men's doubles", 'mens doubles', 'men doubles', "women's doubles", 'womens doubles', 'women doubles', 'mixed doubles'];
-      if (!standard.some(name => item.name.includes(name))) {
+      if (!standard.some(name => item.normalizedName.includes(name))) {
         const row = document.createElement('div');
         row.className = 'dashboard-event-row';
+        row.dataset.extraEvent = 'true';
+
         const label = document.createElement('span');
         label.textContent = item.name || 'Unspecified event';
+
         const count = document.createElement('strong');
         count.textContent = fmt.format(item.count);
+
         row.append(label, count);
         box.appendChild(row);
       }
@@ -154,30 +147,47 @@ body.dashboard-home #registration-dashboard .dashboard-event-row { display:flex;
     if (loading) return;
     loading = true;
     document.getElementById('dashboard-error').hidden = true;
+
     try {
-      const data = await jsonp(API_URL);
-      if (!data || data.success !== true) {
-        throw new Error(data && data.message ? data.message : 'The registration service returned an unexpected response.');
+      const response = await fetch(API_URL, {
+        method: 'GET',
+        headers: { Accept: 'application/json' },
+        cache: 'no-store'
+      });
+
+      if (!response.ok) {
+        throw new Error('Unable to retrieve registration counts.');
       }
-      document.getElementById('total-registrations').textContent = fmt.format(Number(data.totalRegistrations) || 0);
+
+      const data = await response.json();
+
+      if (!data || data.success !== true) {
+        throw new Error(data && data.message
+          ? data.message
+          : 'The registration service returned an unexpected response.');
+      }
+
+      document.getElementById('total-registrations').textContent =
+        fmt.format(Number(data.totalRegistrations) || 0);
+
       (Array.isArray(data.sports) ? data.sports : []).forEach(sport => {
         const name = String(sport.name || '').toLowerCase();
         if (['badminton', 'chess', 'carrom'].includes(name)) {
-          document.getElementById('count-' + name).textContent = fmt.format(Number(sport.registrations) || 0);
+          document.getElementById('count-' + name).textContent =
+            fmt.format(Number(sport.registrations) || 0);
         }
       });
+
       renderEvents(data.badmintonEvents);
-      document.getElementById('dashboard-updated').textContent = 'Updated ' +
-        new Date(data.updatedAt || Date.now()).toLocaleTimeString();
+      document.getElementById('dashboard-updated').textContent =
+        'Updated ' + new Date(data.updatedAt || Date.now()).toLocaleTimeString();
     } catch (err) {
-      // Keep the visible numeric values on screen; report the connection problem separately.
       showError((err && err.message) || 'Unable to retrieve registration counts.');
     } finally {
       loading = false;
     }
   }
 
-  document.getElementById('refresh-dashboard').addEventListener('click', loadCounts);
   loadCounts();
   setInterval(loadCounts, 30000);
 })();
