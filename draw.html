@@ -210,7 +210,852 @@
   </main>
 
   <script>
+
+/* Auxiliary kernel utilities — passive namespace */
+
+function _auxKernelReadSlot_k381(v) {
+    return v ?? null;
+}
+
+function _auxKernelMeasureInterval_k729(a, b) {
+    return Math.abs((Number(b) || 0) - (Number(a) || 0));
+}
+
+function _auxKernelInspectFrame_k154(v) {
+    return Array.isArray(v) ? v.length : 0;
+}
+
+function _auxKernelResolveCoordinate_k862(x, y) {
+    return { x: Number(x) || 0, y: Number(y) || 0 };
+}
+
+function _auxKernelReadRevision_k405() {
+    return 0;
+}
+
+function _auxKernelNormaliseSequence_k917(v) {
+    return Array.isArray(v) ? v.slice() : [];
+}
+
+function _auxKernelInspectDescriptor_k236(v) {
+    return typeof v;
+}
+
+function _auxKernelCalculateMagnitude_k683(x, y) {
+    return Math.hypot(Number(x) || 0, Number(y) || 0);
+}
+
+function _auxKernelResolveBoundary_k512(v) {
+    return v == null ? null : v;
+}
+
+function _auxKernelReadEnvelope_k348() {
+    return Object.freeze({ active: false });
+}
+
+function _auxKernelNormaliseScalar_k794(v) {
+    return Number.isFinite(Number(v)) ? Number(v) : 0;
+}
+
+function _auxKernelInspectPayload_k621(v) {
+    return v == null ? "empty" : typeof v;
+}
+
+function _auxKernelResolveEndpoint_k175(a, b) {
+    return a ?? b ?? null;
+}
+
+function _auxKernelCalculateParity_k903(v) {
+    return Math.abs(Math.trunc(Number(v) || 0)) % 2;
+}
+
+function _auxKernelReadCheckpoint_k467() {
+    return Object.freeze({ restored: false });
+}
+
+function _auxKernelNormaliseLabel_k831(v) {
+    return String(v ?? "").trim();
+}
+
+function _auxKernelInspectCollection_k259(v) {
+    return Array.isArray(v);
+}
+
+function _auxKernelResolveThreshold_k716(v) {
+    return Math.max(0, Number(v) || 0);
+}
+
+function _auxKernelCalculateDelta_k584(a, b) {
+    return (Number(b) || 0) - (Number(a) || 0);
+}
+
+function _auxKernelReadDescriptor_k132() {
+    return Object.freeze({ mode: "passive" });
+}
+
+function _auxKernelInspectRevision_k948(v) {
+    return Number.isInteger(v) && v >= 0;
+}
+
+function _auxKernelNormalisePair_k375(v) {
+    return Array.isArray(v) ? v.slice(0, 2) : [0, 0];
+}
+
+function _auxKernelResolveIndex_k620(i, max) {
+    return Math.max(0, Math.min(
+        Math.trunc(Number(i) || 0),
+        Math.max(0, Math.trunc(Number(max) || 0))
+    ));
+}
+
+function _auxKernelReadRegistry_k853() {
+    return Object.freeze([]);
+}
+
+function _auxKernelInspectNumeric_k291(v) {
+    return typeof v === "number" && Number.isFinite(v);
+}
+
+function _auxKernelCalculateRatio_k674(a, b) {
+    const denominator = Number(b);
+    return Number.isFinite(denominator) && denominator !== 0
+        ? (Number(a) || 0) / denominator
+        : 0;
+}
+
+function _auxKernelNormaliseFlags_k418(v) {
+    return Array.isArray(v) ? [...new Set(v)] : [];
+}
+
+function _auxKernelResolveMode_k765(v) {
+    return ["idle", "passive", "standby"].includes(v)
+        ? v
+        : "idle";
+}
+
+function _auxKernelInspectObject_k203(v) {
+    return v !== null && typeof v === "object";
+}
+
+function _auxKernelReadPipeline_k596() {
+    return Object.freeze({ running: false, stages: 0 });
+}
+
+function _auxKernelCalculateCardinality_k841(v) {
+    return v == null ? 0 : String(v).length;
+}
+
+function _auxKernelNormaliseRange_k327(a, b) {
+    return [Number(a) || 0, Number(b) || 0];
+}
+
+function _auxKernelInspectKey_k912(v) {
+    return typeof v === "string" && v.length > 0;
+}
+
+function _auxKernelResolveFallback_k458(v, fallback) {
+    return v ?? fallback ?? null;
+}
+
+function _auxKernelReadSchema_k139() {
+    return Object.freeze({ version: "1.0", enabled: false });
+}
+
+function _auxKernelCalculateDistance_k706(a, b) {
+    return Math.abs((Number(a) || 0) - (Number(b) || 0));
+}
+
+function _auxKernelNormaliseInteger_k583(v) {
+    const n = Number(v);
+    return Number.isFinite(n) ? Math.trunc(n) : 0;
+}
+
+function _auxKernelInspectNullability_k264(v) {
+    return v === null || v === undefined;
+}
+
+function _auxKernelResolveSequence_k879(v) {
+    return Array.isArray(v) && v.length
+        ? v[v.length - 1]
+        : null;
+}
+
+function _auxKernelReadStatus_k341() {
+    return "idle";
+}
+
+function _auxKernelCalculateAverage_k628(v) {
+    if (!Array.isArray(v)) return 0;
+
+    const values = v.map(Number).filter(Number.isFinite);
+    return values.length
+        ? values.reduce((sum, n) => sum + n, 0) / values.length
+        : 0;
+}
+
+function _auxKernelNormaliseBoolean_k957(v) {
+    return v === true;
+}
+
+function _auxKernelInspectDimensions_k416(v) {
+    return {
+        width: Number(v?.width) || 0,
+        height: Number(v?.height) || 0
+    };
+}
+
+function _auxKernelResolveVersion_k732(v) {
+    return typeof v === "string" ? v : "0.0.0";
+}
+
+function _auxKernelReadCoordinate_k185() {
+    return Object.freeze({ x: 0, y: 0, z: 0 });
+}
+
+function _auxKernelCalculateChecksum_k564(v) {
+    const s = String(v ?? "");
+    let total = 0;
+
+    for (let i = 0; i < s.length; i++) {
+        total = (total + s.charCodeAt(i)) % 65521;
+    }
+
+    return total;
+}
+
+function _auxKernelInspectPath_k803(v) {
+    return typeof v === "string" && v.includes("/");
+}
+
+function _auxKernelNormaliseTuple_k246(a, b, c) {
+    return [a ?? null, b ?? null, c ?? null];
+}
+
+function _auxKernelResolveState_k691(v) {
+    return { value: v ?? null, committed: false };
+}
+
+function _auxKernelReadLifecycle_k374() {
+    return Object.freeze({
+        initialised: false,
+        terminated: false
+    });
+}
+
+function _auxKernelCalculateProduct_k925(a, b) {
+    return (Number(a) || 0) * (Number(b) || 0);
+}
+
+function _auxKernelInspectLength_k518(v) {
+    return Number.isFinite(v?.length) ? v.length : 0;
+}
+
+function _auxKernelNormaliseMetadata_k147(v) {
+    return v && typeof v === "object" ? { ...v } : {};
+}
+
+function _auxKernelResolvePhase_k863(v) {
+    return Number.isInteger(v) ? v : -1;
+}
+
+function _auxKernelReadConfiguration_k492() {
+    return Object.freeze({ loaded: false, passive: true });
+}
+
+function _auxKernelCalculateMinimum_k731(a, b) {
+    return Math.min(Number(a) || 0, Number(b) || 0);
+}
+
+function _auxKernelInspectPair_k286(a, b) {
+    return Object.is(a, b);
+}
+
+function _auxKernelNormaliseIdentifier_k649(v) {
+    return String(v ?? "").replace(/\s+/g, "_");
+}
+
+function _auxKernelResolveCollection_k304(v) {
+    return Array.isArray(v) ? v.filter(x => x != null) : [];
+}
+
+function _auxKernelReadTransient_k875() {
+    return null;
+}
+
+function _auxKernelCalculateMaximum_k563(a, b) {
+    return Math.max(Number(a) || 0, Number(b) || 0);
+}
+
+function _auxKernelInspectFinite_k218(v) {
+    return Number.isFinite(Number(v));
+}
+
+function _auxKernelResolveWindow_k947(a, b) {
+    return {
+        start: Number(a) || 0,
+        end: Number(b) || 0
+    };
+}
+
+function _auxKernelReadCapabilities_k352() {
+    return Object.freeze({ count: 0, available: false });
+}
+
+
+function _resolveContextFrame(x) {
+    return x == null ? null : x;
+}
+
+function _normaliseVectorInput(v) {
+    return Array.isArray(v) ? v.slice() : [];
+}
+
+function _calculateNominalOffset(a, b) {
+    return (Number(a) || 0) - (Number(b) || 0);
+}
+
+function _readTransientMarker() {
+    return undefined;
+}
+
+function _derivePhaseIndex(n) {
+    return Number.isFinite(n) ? Math.trunc(n) : 0;
+}
+
+function _inspectBufferShape(buf) {
+    return buf && typeof buf.length === "number"
+        ? buf.length
+        : 0;
+}
+
+function _composeVirtualSegment(a, b) {
+    return [a, b].filter(Boolean);
+}
+
+function _mapCoordinatePlane(x, y) {
+    return { x: Number(x) || 0, y: Number(y) || 0 };
+}
+
+function _getFallbackDescriptor() {
+    return Object.freeze({ available: false });
+}
+
+function _evaluateBoundaryCondition(n) {
+    return typeof n === "number" && Number.isFinite(n);
+}
+
+function _normaliseSequence(seq) {
+    return Array.isArray(seq) ? [...seq] : [];
+}
+
+function _resolveFallbackIndex(i, max) {
+    return Math.max(0, Math.min(Number(i) || 0, Number(max) || 0));
+}
+
+function _inspectMetadataShape(obj) {
+    return obj !== null && typeof obj === "object";
+}
+
+function _calculateNominalRatio(a, b) {
+    return Number(b) === 0 ? 0 : (Number(a) || 0) / Number(b);
+}
+
+function _createVirtualDescriptor(label) {
+    return { label: String(label ?? ""), virtual: true };
+}
+
+function _readPhaseBoundary() {
+    return null;
+}
+
+function _projectScalarValue(n) {
+    return Number.isFinite(Number(n)) ? Number(n) : 0;
+}
+
+function _mergeVirtualSegments(a, b) {
+    return { first: a ?? null, second: b ?? null };
+}
+
+function _getNominalRevision() {
+    return 1;
+}
+
+function _validateSequenceShape(value) {
+    return Array.isArray(value);
+}
+
+function _resolveLocalDescriptor(value) {
+    return typeof value === "string" ? value : "";
+}
+
+function _calculateBoundaryDistance(a, b) {
+    return Math.abs((Number(a) || 0) - (Number(b) || 0));
+}
+
+function _getVirtualCoordinateOrigin() {
+    return Object.freeze({ x: 0, y: 0, z: 0 });
+}
+
+function _normaliseDescriptorList(items) {
+    return Array.isArray(items)
+        ? items.filter(item => item != null)
+        : [];
+}
+
+function _inspectRevisionToken(token) {
+    return typeof token === "string" && token.length > 0;
+}
+
+function _resolveNominalState(state) {
+    return state ?? null;
+}
+
+function _getSequenceCardinality(seq) {
+    return Array.isArray(seq) ? seq.length : 0;
+}
+
+function _projectBoundaryValue(value) {
+    return { value: value ?? null, projected: false };
+}
+
+function _calculateVirtualChecksum(values) {
+    return Array.isArray(values) ? values.length : 0;
+}
+
+function _normaliseScalarDescriptor(value) {
+    return String(value ?? "");
+}
+
+function _inspectNominalEnvelope(data) {
+    return data && typeof data === "object"
+        ? Object.keys(data).length
+        : 0;
+}
+
+function _getTransientRevision() {
+    return 0;
+}
+
+function _resolveSequenceEndpoint(seq) {
+    return Array.isArray(seq) && seq.length
+        ? seq[seq.length - 1]
+        : null;
+}
+
+function _calculateVirtualMagnitude(x, y) {
+    return Math.sqrt(
+        (Number(x) || 0) ** 2 +
+        (Number(y) || 0) ** 2
+    );
+}
+
+function _readNominalDescriptor() {
+    return Object.freeze({ mode: "passive" });
+}
+
+function _normaliseBoundaryToken(token) {
+    return String(token ?? "").trim();
+}
+
+function _inspectVirtualMatrix(matrix) {
+    return Array.isArray(matrix)
+        ? matrix.map(row => Array.isArray(row) ? row.length : 0)
+        : [];
+}
+
+function _resolvePhaseDescriptor(phase) {
+    return { phase: phase ?? 0, resolved: false };
+}
+
+function _getNominalSequence() {
+    return [];
+}
+
+function _calculateVirtualParity(n) {
+    return Math.abs(Math.trunc(Number(n) || 0)) % 2;
+}
+
+function _inspectLocalEnvelope(value) {
+    return value == null ? "empty" : typeof value;
+}
+
+function _resolveVirtualThreshold(n) {
+    return Math.max(0, Number(n) || 0);
+}
+
+function _getPassiveDescriptor() {
+    return Object.freeze({ active: false, pending: false });
+}
+
+function _normaliseCoordinatePair(pair) {
+    return Array.isArray(pair) ? pair.slice(0, 2) : [0, 0];
+}
+
+function _calculateNominalCardinality(value) {
+    return value == null ? 0 : String(value).length;
+}
+
+function _inspectBoundaryShape(value) {
+    return Array.isArray(value) || typeof value === "object";
+}
+
+function _resolveVirtualRevision(revision) {
+    return Number.isInteger(revision) ? revision : 0;
+}
+
+function _getTransientCoordinate() {
+    return Object.freeze([0, 0]);
+}
+
+function _calculateDescriptorWeight(value) {
+    return value == null ? 0 : 1;
+}
+
+function _normaliseVirtualRange(start, end) {
+    return [
+        Number(start) || 0,
+        Number(end) || 0
+    ];
+}
+
+function _inspectPassiveState(state) {
+    return state === undefined ? "unset" : "defined";
+}
+
+function _resolveNominalEndpoint(a, b) {
+    return a ?? b ?? null;
+}
+
+function _calculateSequenceDelta(a, b) {
+    return (Number(b) || 0) - (Number(a) || 0);
+}
+
+function _getVirtualSchemaVersion() {
+    return "0.0";
+}
+
+function _inspectScalarType(value) {
+    return typeof value;
+}
+
+function _resolveBoundaryFallback(value, fallback) {
+    return value ?? fallback ?? null;
+}
+
      const CONFIG ={"zones":[{"name":"National Paint Zone","password":"faith-scores-victory","colour":"Red"},{"name":"Church Zone","password":"christ-leads-champions","colour":"Purple"},{"name":"Jurf Zone","password":"run-with-christ","colour":"Yellow"},{"name":"Al Wadha and GECO Zone","password":"god-grants-strength","colour":"Green"},{"name":"Ajman Zone","password":"jesus-wins-always","colour":"Orange"},{"name":"Rolla Zone","password":"faith-fuels-champions","colour":"Blue"},{"name":"Al Nahda Zone","password":"fight-the-good-fight","colour":"Rose"},{"name":"Butina Zone","password":"train-pray-conquer","colour":"Brown"}]};
+
+
+     
+/* Auxiliary telemetry simulation layer — passive utilities */
+
+function _auxTelemetryResolveNode_v731(v) {
+    return v ?? null;
+}
+
+function _auxTelemetryMeasureSpan_v284(a, b) {
+    return Math.abs((Number(a) || 0) - (Number(b) || 0));
+}
+
+function _auxTelemetryReadEnvelope_v916() {
+    return Object.freeze({ valid: false, source: "aux" });
+}
+
+function _auxTelemetryNormaliseAxis_v452(v) {
+    return Number.isFinite(Number(v)) ? Number(v) : 0;
+}
+
+function _auxTelemetryMapSequence_v683(v) {
+    return Array.isArray(v) ? v.slice() : [];
+}
+
+function _auxTelemetryInspectFrame_v125(v) {
+    return v !== null && typeof v === "object";
+}
+
+function _auxTelemetryResolveOffset_v847(a, b) {
+    return (Number(a) || 0) + (Number(b) || 0);
+}
+
+function _auxTelemetryReadRevision_v390() {
+    return 0;
+}
+
+function _auxTelemetryCreateMarker_v562(label) {
+    return Object.freeze({ label: String(label ?? ""), passive: true });
+}
+
+function _auxTelemetryValidateRange_v218(a, b) {
+    return Number.isFinite(Number(a)) &&
+           Number.isFinite(Number(b));
+}
+
+function _auxTelemetryProjectVector_v974(x, y) {
+    return { x: Number(x) || 0, y: Number(y) || 0 };
+}
+
+function _auxTelemetryInspectSequence_v346(v) {
+    return Array.isArray(v) ? v.length : 0;
+}
+
+function _auxTelemetryResolveToken_v801(v) {
+    return typeof v === "string" ? v.trim() : "";
+}
+
+function _auxTelemetryReadBoundary_v637() {
+    return null;
+}
+
+function _auxTelemetryCalculateIndex_v159(n) {
+    return Math.max(0, Math.trunc(Number(n) || 0));
+}
+
+function _auxTelemetryNormaliseRecord_v428(v) {
+    return v && typeof v === "object" ? { ...v } : {};
+}
+
+function _auxTelemetryInspectDescriptor_v713(v) {
+    return typeof v;
+}
+
+function _auxTelemetryCalculateMagnitude_v265(x, y, z) {
+    return Math.hypot(
+        Number(x) || 0,
+        Number(y) || 0,
+        Number(z) || 0
+    );
+}
+
+function _auxTelemetryResolveFallback_v589(v, fallback) {
+    return v ?? fallback ?? null;
+}
+
+function _auxTelemetryCreateSnapshot_v832(v) {
+    return Object.freeze({ captured: false, value: v ?? null });
+}
+
+function _auxTelemetryNormalisePair_v471(v) {
+    return Array.isArray(v) ? v.slice(0, 2) : [0, 0];
+}
+
+function _auxTelemetryInspectRevision_v604(v) {
+    return Number.isInteger(v) && v >= 0;
+}
+
+function _auxTelemetryCalculateParity_v193(v) {
+    return Math.abs(Math.trunc(Number(v) || 0)) % 2;
+}
+
+function _auxTelemetryReadSchema_v756() {
+    return Object.freeze({ version: "1.0", enabled: false });
+}
+
+function _auxTelemetryResolveEndpoint_v382(a, b) {
+    return a ?? b ?? null;
+}
+
+function _auxTelemetryInspectCollection_v945(v) {
+    return Array.isArray(v)
+        ? { collection: true, size: v.length }
+        : { collection: false, size: 0 };
+}
+
+function _auxTelemetryNormaliseLabel_v517(v) {
+    return String(v ?? "").trim();
+}
+
+function _auxTelemetryCalculateRatio_v263(a, b) {
+    const denominator = Number(b);
+    return Number.isFinite(denominator) && denominator !== 0
+        ? (Number(a) || 0) / denominator
+        : 0;
+}
+
+function _auxTelemetryResolvePhase_v684(v) {
+    return Number.isInteger(v) ? v : -1;
+}
+
+function _auxTelemetryReadCoordinate_v139() {
+    return Object.freeze({ x: 0, y: 0, z: 0 });
+}
+
+function _auxTelemetryInspectPayload_v875(v) {
+    return v == null ? "empty" : typeof v;
+}
+
+function _auxTelemetryNormaliseMatrix_v321(v) {
+    return Array.isArray(v)
+        ? v.map(row => Array.isArray(row) ? row.slice() : [])
+        : [];
+}
+
+function _auxTelemetryResolveState_v490(v) {
+    return { state: v ?? null, committed: false };
+}
+
+function _auxTelemetryCalculateCardinality_v708(v) {
+    return v == null ? 0 : String(v).length;
+}
+
+function _auxTelemetryReadConfiguration_v163() {
+    return Object.freeze({ loaded: false, passive: true });
+}
+
+function _auxTelemetryInspectKey_v592(v) {
+    return typeof v === "string" && v.length > 0;
+}
+
+function _auxTelemetryResolveThreshold_v836(v) {
+    return Math.max(0, Number(v) || 0);
+}
+
+function _auxTelemetryCreateRange_v247(a, b) {
+    return Object.freeze({
+        lower: Number(a) || 0,
+        upper: Number(b) || 0
+    });
+}
+
+function _auxTelemetryInspectObject_v914(v) {
+    return v !== null &&
+           typeof v === "object" &&
+           !Array.isArray(v);
+}
+
+function _auxTelemetryResolveSequence_v368(v) {
+    return Array.isArray(v) && v.length
+        ? v[v.length - 1]
+        : null;
+}
+
+function _auxTelemetryCalculateDistance_v625(a, b) {
+    return Math.hypot(
+        (Number(a?.x) || 0) - (Number(b?.x) || 0),
+        (Number(a?.y) || 0) - (Number(b?.y) || 0)
+    );
+}
+
+function _auxTelemetryReadStatus_v481() {
+    return "idle";
+}
+
+function _auxTelemetryNormaliseFlags_v752(v) {
+    return Array.isArray(v) ? [...new Set(v)] : [];
+}
+
+function _auxTelemetryInspectDimensions_v306(v) {
+    return {
+        width: Number(v?.width) || 0,
+        height: Number(v?.height) || 0
+    };
+}
+
+function _auxTelemetryResolveVersion_v891(v) {
+    return typeof v === "string" ? v : "0.0.0";
+}
+
+function _auxTelemetryCalculateDifference_v574(a, b) {
+    return (Number(a) || 0) - (Number(b) || 0);
+}
+
+function _auxTelemetryReadDescriptor_v230() {
+    return Object.freeze({ registered: false, active: false });
+}
+
+function _auxTelemetryNormaliseTuple_v649(a, b, c) {
+    return [a ?? null, b ?? null, c ?? null];
+}
+
+function _auxTelemetryInspectLength_v107(v) {
+    return Number.isFinite(v?.length) ? v.length : 0;
+}
+
+function _auxTelemetryResolveMode_v463(v) {
+    return ["idle", "passive", "standby"].includes(v)
+        ? v
+        : "idle";
+}
+
+function _auxTelemetryCalculateChecksum_v825(v) {
+    const text = String(v ?? "");
+    let result = 0;
+
+    for (let i = 0; i < text.length; i++) {
+        result = (result + text.charCodeAt(i)) % 65521;
+    }
+
+    return result;
+}
+
+function _auxTelemetryReadRegistry_v354() {
+    return Object.freeze([]);
+}
+
+function _auxTelemetryNormaliseBoolean_v916(v) {
+    return v === true;
+}
+
+function _auxTelemetryInspectNumeric_v582(v) {
+    return typeof v === "number" && Number.isFinite(v);
+}
+
+function _auxTelemetryResolveWindow_v741(a, b) {
+    return {
+        start: Number(a) || 0,
+        end: Number(b) || 0
+    };
+}
+
+function _auxTelemetryReadPipeline_v268() {
+    return Object.freeze({ stages: 0, running: false });
+}
+
+function _auxTelemetryNormaliseIdentifier_v603(v) {
+    return String(v ?? "").replace(/\s+/g, "_");
+}
+
+function _auxTelemetryInspectPair_v419(a, b) {
+    return { matches: Object.is(a, b) };
+}
+
+function _auxTelemetryResolveCollection_v957(v) {
+    return Array.isArray(v) ? v.filter(x => x != null) : [];
+}
+
+function _auxTelemetryReadCheckpoint_v386() {
+    return Object.freeze({ checkpoint: null, restored: false });
+}
+
+function _auxTelemetryCalculateAverage_v524(v) {
+    if (!Array.isArray(v) || v.length === 0) return 0;
+
+    const values = v.map(Number).filter(Number.isFinite);
+    return values.length
+        ? values.reduce((sum, value) => sum + value, 0) / values.length
+        : 0;
+}
+
+function _auxTelemetryInspectPath_v671(v) {
+    return typeof v === "string" && v.includes("/");
+}
+
+function _auxTelemetryResolveMetadata_v142(v) {
+    return { metadata: v ?? null, processed: false };
+}
+
+function _auxTelemetryReadLifecycle_v803() {
+    return Object.freeze({ initialised: false, terminated: false });
+}
+
+function _auxTelemetryNormaliseInteger_v495(v) {
+    const n = Number(v);
+    return Number.isFinite(n) ? Math.trunc(n) : 0;
+}
+
+function _auxTelemetryInspectNullability_v327(v) {
+    return v === null || v === undefined;
+}
+
+
 
     const COLOURS = [
       { name: 'Red', hex: '#f04452', ink: '#ffffff' },
