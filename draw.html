@@ -1,0 +1,410 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#111519">
+
+  <title>Regional Sports Day - JY Sharjah</title>
+        <link rel="icon" type="image/png" href="images/rsd-logo.png">
+		<meta charset="utf-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
+		 
+		<noscript><link rel="stylesheet" href="assets/css/noscript.css" /></noscript>
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=Source+Sans+3:wght@300;400;600;700;800&display=swap');
+    :root {
+      color-scheme: dark;
+      --bg: #111519;
+      --panel: rgba(27, 31, 34, .88);
+      --panel-border: rgba(255,255,255,.19);
+      --muted: rgba(255,255,255,.62);
+      --text: #f8fafc;
+      --accent: #a8d8ff;
+      --danger: #ff7b86;
+      --success: #9be7bd;
+    }
+    * { box-sizing: border-box; }
+    html { min-width: 320px; background: var(--bg); }
+    body {
+      margin: 0; min-height: 100vh; color: var(--text);
+      font: 400 16px/1.55 'Source Sans 3', 'Source Sans Pro', system-ui, sans-serif;
+      background:
+        radial-gradient(ellipse at 15% 15%, rgba(41,112,154,.20), transparent 38%),
+        radial-gradient(ellipse at 88% 82%, rgba(124,58,237,.13), transparent 32%),
+        linear-gradient(145deg, #171c20, #0e1114 68%);
+      display: flex; flex-direction: column; align-items: center;
+      padding: 28px 18px 20px;
+    }
+    button, input, select { font: inherit; }
+    button, select, input { -webkit-tap-highlight-color: transparent; }
+    .page { width: 100%; max-width: 860px; margin: auto; }
+    .masthead { display:flex; align-items:center; justify-content:center; gap:13px; margin: 8px auto 28px; text-align:left; }
+    .mark {
+      width:48px; height:48px; flex:0 0 48px; border-radius:50%;
+      background: conic-gradient(#f04452 0 45deg,#3b82f6 45deg 90deg,#facc15 90deg 135deg,#22c55e 135deg 180deg,#fb923c 180deg 225deg,#a78bfa 225deg 270deg,#f472b6 270deg 315deg,#a87952 315deg 360deg);
+      padding: 3px; box-shadow: 0 0 34px rgba(168,216,255,.11);
+    }
+    .mark::after { content:''; display:block; width:100%; height:100%; border-radius:50%; border:2px solid #171b1f; background:#171b1f; }
+    .brand-line { margin:0; color:var(--muted); font-size:.72rem; font-weight:700; letter-spacing:.22em; text-transform:uppercase; }
+    .brand-name { margin:2px 0 0; font-size:1.05rem; font-weight:700; letter-spacing:.12em; text-transform:uppercase; }
+    .panel { border:1px solid var(--panel-border); border-radius:18px; overflow:hidden; background:var(--panel); box-shadow: 0 22px 80px rgba(0,0,0,.32); backdrop-filter: blur(14px); }
+    .panel-head { padding:34px 28px 26px; text-align:center; border-bottom:1px solid rgba(255,255,255,.12); background:linear-gradient(180deg,rgba(255,255,255,.035),transparent); }
+    .eyebrow { margin:0 0 10px; color:var(--accent); font-size:.72rem; letter-spacing:.24em; text-transform:uppercase; font-weight:700; }
+    h1 { margin:0; font-size:clamp(1.7rem, 5vw, 2.65rem); line-height:1.12; letter-spacing:.11em; text-transform:uppercase; font-weight:800; }
+    .subtitle { max-width:520px; margin:13px auto 0; color:var(--muted); font-size:1rem; }
+    .panel-body { padding:clamp(22px,5vw,42px); }
+    .login-grid { max-width:480px; margin:0 auto; }
+    .field { margin:0 0 21px; }
+    label { display:block; margin:0 0 8px; color:#f1f5f9; font-size:.74rem; font-weight:700; text-transform:uppercase; letter-spacing:.14em; }
+    .control { width:100%; min-height:52px; padding:12px 14px; border:1px solid rgba(255,255,255,.27); border-radius:9px; color:var(--text); background:rgba(255,255,255,.045); outline:none; transition:border-color .18s, box-shadow .18s, background .18s; }
+    .control:focus { border-color:var(--accent); box-shadow:0 0 0 3px rgba(168,216,255,.13); background:rgba(255,255,255,.075); }
+    select.control { appearance:auto; }
+    select.control option { color:#fff; background:#1b1f22; }
+    .password-wrap { display:flex; gap:8px; }
+    .password-wrap input { min-width:0; flex:1; }
+    .reveal-pass { flex:0 0 auto; padding:0 13px; border:1px solid rgba(255,255,255,.25); border-radius:9px; color:#fff; background:rgba(255,255,255,.05); cursor:pointer; }
+    .reveal-pass:hover { background:rgba(255,255,255,.11); }
+    .primary-btn, .secondary-btn { display:inline-flex; justify-content:center; align-items:center; gap:10px; min-height:52px; padding:12px 20px; border-radius:9px; cursor:pointer; font-weight:800; letter-spacing:.1em; text-transform:uppercase; transition:transform .15s, background .15s, border-color .15s; }
+    .primary-btn { width:100%; color:#10171b; background:#f8fafc; border:1px solid #f8fafc; }
+    .primary-btn:hover { background:#cdeaff; border-color:#cdeaff; transform:translateY(-1px); }
+    .primary-btn:disabled { cursor:wait; opacity:.65; transform:none; }
+    .secondary-btn { color:#f8fafc; background:transparent; border:1px solid rgba(255,255,255,.3); }
+    .secondary-btn:hover { background:rgba(255,255,255,.08); border-color:rgba(255,255,255,.55); }
+    .status { min-height:24px; margin:12px 0 0; color:var(--danger); text-align:center; font-size:.92rem; }
+    .palette { display:grid; grid-template-columns:repeat(8,minmax(0,1fr)); gap:8px; margin:27px 0 0; }
+    .palette-item { display:flex; flex-direction:column; gap:7px; align-items:center; min-width:0; }
+    .swatch { width:100%; aspect-ratio:1.45/1; border-radius:7px; border:1px solid rgba(255,255,255,.2); box-shadow:inset 0 1px rgba(255,255,255,.18); transition:transform .18s, box-shadow .18s, opacity .18s; }
+    .swatch-label { color:rgba(255,255,255,.65); font-size:.65rem; line-height:1.2; letter-spacing:.025em; text-align:center; }
+    .palette-item.active .swatch { transform:translateY(-3px) scale(1.04); box-shadow:0 0 0 2px #fff, 0 0 22px var(--swatch); }
+    .palette-item.active .swatch-label { color:#fff; font-weight:700; }
+    .screen[hidden] { display:none !important; }
+    .draw-body { text-align:center; }
+    .draw-kicker { margin:0 0 8px; color:var(--muted); font-size:.75rem; letter-spacing:.19em; font-weight:700; text-transform:uppercase; }
+    .zone-heading { margin:0 0 25px; font-size:clamp(1.15rem,3.5vw,1.55rem); letter-spacing:.07em; text-transform:uppercase; overflow-wrap:anywhere; }
+    .draw-display { position:relative; display:grid; place-items:center; width:min(100%,360px); min-height:220px; margin:0 auto 20px; padding:25px; border:1px solid rgba(255,255,255,.16); border-radius:18px; background:radial-gradient(circle at center,rgba(255,255,255,.09),rgba(255,255,255,.015) 63%); overflow:hidden; }
+    .orbit { position:absolute; inset:22px; border:1px dashed rgba(255,255,255,.19); border-radius:50%; animation:orbit 24s linear infinite; }
+    .orbit-dot { position:absolute; width:13px; height:13px; border:2px solid rgba(255,255,255,.7); border-radius:50%; box-shadow:0 0 16px currentColor; }
+    .orbit-dot:nth-child(1){top:-6px;left:calc(50% - 6px)} .orbit-dot:nth-child(2){top:11%;right:12%} .orbit-dot:nth-child(3){top:calc(50% - 6px);right:-6px} .orbit-dot:nth-child(4){bottom:11%;right:12%} .orbit-dot:nth-child(5){bottom:-6px;left:calc(50% - 6px)} .orbit-dot:nth-child(6){bottom:11%;left:12%} .orbit-dot:nth-child(7){top:calc(50% - 6px);left:-6px} .orbit-dot:nth-child(8){top:11%;left:12%}
+    .current-colour { position:relative; z-index:1; display:flex; align-items:center; justify-content:center; min-width:180px; min-height:76px; padding:14px 22px; border-radius:12px; background:#fff; color:#111519; box-shadow:0 12px 45px rgba(0,0,0,.28); font-size:clamp(1.5rem,5vw,2.1rem); font-weight:800; line-height:1.1; letter-spacing:.07em; text-transform:uppercase; transition:background .08s,color .08s; overflow-wrap:anywhere; }
+    .draw-status { min-height:26px; margin:0; color:var(--muted); }
+    .result-body { text-align:center; padding-top:34px; padding-bottom:38px; }
+    .result-badge { display:inline-block; padding:6px 12px; border:1px solid rgba(255,255,255,.24); border-radius:100px; color:var(--success); font-size:.7rem; font-weight:800; letter-spacing:.17em; text-transform:uppercase; }
+    .result-zone { margin:18px 0 20px; color:var(--muted); font-size:.95rem; overflow-wrap:anywhere; }
+    .result-swatch { width:min(100%,400px); min-height:188px; margin:0 auto 24px; display:grid; place-items:center; border-radius:16px; border:1px solid rgba(255,255,255,.28); box-shadow:0 18px 60px rgba(0,0,0,.28); animation:result-in .6s cubic-bezier(.2,.8,.2,1) both; }
+    .result-colour-name { padding:18px; font-size:clamp(2.2rem,8vw,4rem); line-height:1.05; font-weight:800; letter-spacing:.1em; text-transform:uppercase; overflow-wrap:anywhere; }
+    .result-caption { margin:0 auto 24px; color:var(--muted); }
+    .footer { margin:20px 0 0; color:rgba(255,255,255,.43); text-align:center; font-size:.69rem; letter-spacing:.14em; text-transform:uppercase; }
+    .noscript { margin:1rem 0; color:#ffb4b4; }
+    @keyframes orbit { to { transform:rotate(360deg); } }
+    @keyframes result-in { from { opacity:0; transform:scale(.9) translateY(10px); } to { opacity:1; transform:scale(1) translateY(0); } }
+
+    .confirm-overlay { position:fixed; inset:0; z-index:1000; display:grid; place-items:center; padding:18px; background:rgba(0,0,0,.76); backdrop-filter:blur(7px); }
+    .confirm-overlay[hidden] { display:none !important; }
+    .confirm-dialog { width:min(100%,520px); padding:clamp(22px,4vw,32px); border:1px solid rgba(255,255,255,.22); border-radius:16px; background:#1b2025; box-shadow:0 24px 90px rgba(0,0,0,.55); }
+    .confirm-dialog h2 { margin:0 0 8px; font-size:1.35rem; letter-spacing:.04em; }
+    .confirm-intro { margin:0 0 20px; color:var(--muted); }
+    .confirm-check { display:flex; align-items:flex-start; gap:12px; margin:14px 0; padding:14px; border:1px solid rgba(255,255,255,.15); border-radius:10px; background:rgba(255,255,255,.035); cursor:pointer; }
+    .confirm-check input { flex:0 0 auto; width:20px; height:20px; margin:2px 0 0; accent-color:#a8d8ff; }
+    .confirm-check span { display:block; font-size:.98rem; line-height:1.4; }
+    .confirm-actions { display:flex; gap:10px; margin-top:22px; }
+    .confirm-actions button { flex:1; }
+    .confirm-draw-btn:disabled { opacity:.4; cursor:not-allowed; transform:none; }
+    body.modal-open { overflow:hidden; }
+    @media(max-width:420px) { .confirm-actions { flex-direction:column-reverse; } }
+
+    @media(max-width:560px) {
+      body { padding:16px 12px; }
+      .masthead { margin:6px auto 18px; }
+      .panel-head { padding:27px 18px 22px; }
+      .palette { grid-template-columns:repeat(4,minmax(0,1fr)); gap:12px 8px; }
+      .swatch-label { font-size:.72rem; }
+      .draw-display { min-height:200px; }
+      .orbit { inset:20px; }
+    }
+    @media(prefers-reduced-motion:reduce) {
+      *,*::before,*::after { animation-duration:.01ms !important; animation-iteration-count:1 !important; scroll-behavior:auto !important; transition-duration:.01ms !important; }
+    }
+  </style>
+</head>
+<body>
+  <main class="page">
+     
+
+    <section class="panel" aria-labelledby="page-title">
+      <div class="panel-head">
+        <div > <img src="images/rsd-logo.png" alt="Regional Sports Day - JY Sharjah" style=" width:10%; height:auto;  pointer-events:none;">	 </div>
+   
+        <div><p class="eyebrow">Regional Sports Day</p><p class="eyebrow">JY Sharjah</p></div>
+        <h1 id="page-title">Colour Draw</h1>
+  
+      </div>
+
+      <div class="panel-body screen" id="login-screen">
+        <form class="login-grid" id="login-form" autocomplete="on">
+          <div class="field">
+            <label for="zone-select">Select your zone</label>
+            <select class="control" id="zone-select" name="zone" required>
+              <option value="" selected disabled>Choose a zone…</option>
+            </select>
+          </div>
+          <div class="field">
+            <label for="zone-password">Access password</label>
+            <div class="password-wrap">
+              <input class="control" id="zone-password" name="password" type="password" placeholder="Enter your access password" autocomplete="current-password" required>
+              <button class="reveal-pass" id="toggle-password" type="button" aria-label="Show password" aria-pressed="false">Show</button>
+            </div>
+          </div>
+          <button class="primary-btn" id="submit-button" type="submit">Verify &amp; start draw <span aria-hidden="true">↗</span></button>
+          <p class="status" id="login-status" role="status" aria-live="polite"></p>
+        </form>
+
+        <div class="palette" id="login-palette" aria-label="The eight available colours"></div>
+      </div>
+
+      <div class="panel-body screen draw-body" id="draw-screen" hidden aria-live="polite">
+        <p class="draw-kicker">Access verified</p>
+        <h2 class="zone-heading" id="draw-zone"></h2>
+        <div class="draw-display" aria-label="Colour draw animation">
+          <div class="orbit" aria-hidden="true">
+            <i class="orbit-dot" style="color:#f04452;background:#f04452"></i><i class="orbit-dot" style="color:#3b82f6;background:#3b82f6"></i><i class="orbit-dot" style="color:#facc15;background:#facc15"></i><i class="orbit-dot" style="color:#22c55e;background:#22c55e"></i><i class="orbit-dot" style="color:#fb923c;background:#fb923c"></i><i class="orbit-dot" style="color:#a78bfa;background:#a78bfa"></i><i class="orbit-dot" style="color:#f472b6;background:#f472b6"></i><i class="orbit-dot" style="color:#a87952;background:#a87952"></i>
+          </div>
+          <div class="current-colour" id="current-colour">Ready</div>
+        </div>
+        <p class="draw-status" id="draw-status">Preparing the colour reveal…</p>
+        <div class="palette" id="draw-palette" aria-label="Colour sequence"></div>
+      </div>
+
+      <div class="panel-body result-body screen" id="result-screen" hidden>
+        <span class="result-badge">Allocation confirmed</span>
+        <p class="result-zone" id="result-zone"></p>
+        <div class="result-swatch" id="result-swatch">
+          <div class="result-colour-name" id="result-colour-name"></div>
+        </div>
+        <p class="result-caption">Your zone's assigned colour is shown above.</p>
+        <button type="button" class="secondary-btn" id="restart-button">EXIT</button>
+      </div>
+    </section>
+
+    <div class="confirm-overlay" id="confirm-overlay" hidden>
+      <section class="confirm-dialog" role="dialog" aria-modal="true" aria-labelledby="confirm-title" aria-describedby="confirm-intro">
+        <h2 id="confirm-title">Confirm final colour draw</h2>
+        <p class="confirm-intro" id="confirm-intro">Please review and acknowledge both statements before the draw begins.</p>
+        <label class="confirm-check">
+          <input type="checkbox" id="confirm-final">
+          <span>I understand that this is final and no changes will be made after the result is revealed.</span>
+        </label>
+        <label class="confirm-check">
+          <input type="checkbox" id="confirm-details">
+          <span>I confirm that the selected zone is correct.</span>
+        </label>
+        <div class="confirm-actions">
+          <button type="button" class="secondary-btn" id="cancel-draw">Cancel</button>
+          <button type="button" class="primary-btn confirm-draw-btn" id="confirm-draw" disabled>Confirm &amp; draw</button>
+        </div>
+      </section>
+    </div>
+
+    <noscript><p class="noscript">JavaScript must be enabled to use the colour draw.</p></noscript>
+    <footer class="footer">Together in sports, united in spirit</footer>
+  </main>
+
+  <script>
+     const CONFIG ={"zones":[{"name":"National Paint Zone","password":"faith-scores-victory","colour":"Red"},{"name":"Church Zone","password":"christ-leads-champions","colour":"Purple"},{"name":"Jurf Zone","password":"run-with-christ","colour":"Yellow"},{"name":"Al Wadha and GECO Zone","password":"god-grants-strength","colour":"Green"},{"name":"Ajman Zone","password":"jesus-wins-always","colour":"Orange"},{"name":"Rolla Zone","password":"faith-fuels-champions","colour":"Blue"},{"name":"Al Nahda Zone","password":"fight-the-good-fight","colour":"Rose"},{"name":"Butina Zone","password":"train-pray-conquer","colour":"Brown"}]};
+
+    const COLOURS = [
+      { name: 'Red', hex: '#f04452', ink: '#ffffff' },
+      { name: 'Blue', hex: '#3b82f6', ink: '#ffffff' },
+      { name: 'Yellow', hex: '#facc15', ink: '#1b1f22' },
+      { name: 'Green', hex: '#22c55e', ink: '#102118' },
+      { name: 'Orange', hex: '#fb923c', ink: '#241508' },
+      { name: 'Purple', hex: '#a78bfa', ink: '#211638' },
+      { name: 'Rose', hex: '#f472b6', ink: '#321326' },
+      { name: 'Brown', hex: '#a87952', ink: '#ffffff' }
+    ];
+
+    const byId = (id) => document.getElementById(id);
+    const loginScreen = byId('login-screen');
+    const drawScreen = byId('draw-screen');
+    const resultScreen = byId('result-screen');
+    const zoneSelect = byId('zone-select');
+    const passwordInput = byId('zone-password');
+    const submitButton = byId('submit-button');
+    const loginStatus = byId('login-status');
+    const currentColour = byId('current-colour');
+    const drawStatus = byId('draw-status');
+    const paletteByName = new Map(COLOURS.map((colour) => [colour.name, colour]));
+
+    function makePalette(containerId) {
+      const container = byId(containerId);
+      COLOURS.forEach((colour) => {
+        const item = document.createElement('div');
+        item.className = 'palette-item';
+        item.dataset.colour = colour.name;
+        const swatch = document.createElement('div');
+        swatch.className = 'swatch';
+        swatch.style.background = colour.hex;
+        swatch.style.setProperty('--swatch', colour.hex);
+        swatch.setAttribute('aria-hidden', 'true');
+        const label = document.createElement('span');
+        label.className = 'swatch-label';
+        label.textContent = colour.name;
+        item.append(swatch, label);
+        container.append(item);
+      });
+    }
+
+    function highlightColour(name, containerId) {
+      byId(containerId).querySelectorAll('.palette-item').forEach((item) => {
+        const active = item.dataset.colour === name;
+        item.classList.toggle('active', active);
+        if (active) item.setAttribute('aria-current', 'true');
+        else item.removeAttribute('aria-current');
+      });
+    }
+
+    function showScreen(screen) {
+      [loginScreen, drawScreen, resultScreen].forEach((candidate) => candidate.hidden = candidate !== screen);
+    }
+
+    CONFIG.zones.forEach((zone, index) => {
+      const option = document.createElement('option');
+      option.value = String(index);
+      option.textContent = zone.name;
+      zoneSelect.appendChild(option);
+    });
+    makePalette('login-palette');
+    makePalette('draw-palette');
+
+    byId('toggle-password').addEventListener('click', () => {
+      const showing = passwordInput.type === 'text';
+      passwordInput.type = showing ? 'password' : 'text';
+      byId('toggle-password').textContent = showing ? 'Show' : 'Hide';
+      byId('toggle-password').setAttribute('aria-pressed', String(!showing));
+      byId('toggle-password').setAttribute('aria-label', showing ? 'Show password' : 'Hide password');
+      passwordInput.focus();
+    });
+
+    byId('login-form').addEventListener('submit', (event) => {
+      event.preventDefault();
+      loginStatus.textContent = '';
+      const index = zoneSelect.value;
+      const zone = CONFIG.zones[Number(index)];
+      const suppliedPassword = passwordInput.value;
+      if (!zone || suppliedPassword !== zone.password) {
+        loginStatus.textContent = 'The zone or password is incorrect. Please try again.';
+        passwordInput.select();
+        return;
+      }
+      if (!paletteByName.has(zone.colour)) {
+        loginStatus.textContent = 'This zone has an invalid colour configuration. Please contact the organiser.';
+        return;
+      }
+      passwordInput.value = '';
+      openConfirmation(zone);
+    });
+
+    let pendingZone = null;
+    const confirmOverlay = byId('confirm-overlay');
+    const confirmFinal = byId('confirm-final');
+    const confirmDetails = byId('confirm-details');
+    const confirmDrawButton = byId('confirm-draw');
+
+    function updateConfirmButton() {
+      confirmDrawButton.disabled = !(confirmFinal.checked && confirmDetails.checked);
+    }
+
+    function openConfirmation(zone) {
+      pendingZone = zone;
+      confirmFinal.checked = false;
+      confirmDetails.checked = false;
+      updateConfirmButton();
+      confirmOverlay.hidden = false;
+      document.body.classList.add('modal-open');
+      byId('cancel-draw').focus();
+    }
+
+    function closeConfirmation() {
+      confirmOverlay.hidden = true;
+      document.body.classList.remove('modal-open');
+      pendingZone = null;
+      submitButton.focus();
+    }
+
+    confirmFinal.addEventListener('change', updateConfirmButton);
+    confirmDetails.addEventListener('change', updateConfirmButton);
+
+    byId('cancel-draw').addEventListener('click', closeConfirmation);
+
+    byId('confirm-draw').addEventListener('click', () => {
+      if (!pendingZone || !confirmFinal.checked || !confirmDetails.checked) return;
+      const zoneToDraw = pendingZone;
+      confirmOverlay.hidden = true;
+      document.body.classList.remove('modal-open');
+      pendingZone = null;
+      startDraw(zoneToDraw);
+    });
+
+    confirmOverlay.addEventListener('click', (event) => {
+      if (event.target === confirmOverlay) closeConfirmation();
+    });
+
+    document.addEventListener('keydown', (event) => {
+      if (event.key === 'Escape' && !confirmOverlay.hidden) closeConfirmation();
+    });
+
+    function startDraw(zone) {
+      showScreen(drawScreen);
+      byId('draw-zone').textContent = zone.name;
+      currentColour.textContent = 'Ready';
+      currentColour.style.background = '#ffffff';
+      currentColour.style.color = '#111519';
+      drawStatus.textContent = 'The colour sequence is starting…';
+      const reducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+      const steps = reducedMotion ? 4 : 38;
+      let step = 0;
+      const finalColour = paletteByName.get(zone.colour);
+      const shuffled = [...COLOURS].sort(() => Math.random() - 0.5);
+      const sequence = Array.from({ length: steps - 1 }, (_, index) => shuffled[index % shuffled.length]);
+      sequence.push(finalColour); // The result is configured in advance; the animation does not determine it.
+
+      function tick() {
+        const colour = sequence[step];
+        currentColour.textContent = colour.name;
+        currentColour.style.background = colour.hex;
+        currentColour.style.color = colour.ink;
+        highlightColour(colour.name, 'draw-palette');
+        if (step === sequence.length - 1) {
+          drawStatus.textContent = 'Finalising your assigned colour…';
+          window.setTimeout(() => showResult(zone, finalColour), reducedMotion ? 160 : 650);
+          return;
+        }
+        drawStatus.textContent = step < 8 ? 'Colours are cycling…' : 'Almost there…';
+        step += 1;
+        const progress = step / sequence.length;
+        const delay = reducedMotion ? 90 : 38 + Math.pow(progress, 2.7) * 390;
+        window.setTimeout(tick, delay);
+      }
+      window.setTimeout(tick, reducedMotion ? 20 : 180);
+    }
+
+    function showResult(zone, colour) {
+      byId('result-zone').textContent = zone.name;
+      byId('result-colour-name').textContent = colour.name;
+      byId('result-swatch').style.background = colour.hex;
+      byId('result-colour-name').style.color = colour.ink;
+      showScreen(resultScreen);
+      byId('restart-button').focus();
+    }
+
+    byId('restart-button').addEventListener('click', () => {
+      showScreen(loginScreen);
+      zoneSelect.value = '';
+      passwordInput.value = '';
+      loginStatus.textContent = '';
+      highlightColour('', 'login-palette');
+      zoneSelect.focus();
+    });
+  </script>
+</body>
+</html>
